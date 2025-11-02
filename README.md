@@ -206,7 +206,6 @@ qdrant_vector_aggregator/
 ├── SETUP_INSTRUCTIONS.md         # Detailed setup guide
 ├── LICENSE                       # MIT License
 ├── setup.py                      # Installation script
-│
 └── qdrant_vector_aggregator/     # Main package
     ├── __init__.py              # Package initialization
     ├── aggregator.py            # Core aggregation logic
