@@ -152,9 +152,3 @@ pip install -e . -f setup_qdrant.py
 - The `.env` file is already in `.gitignore`
 - Use `.env.example` as a template for sharing
 - For production, consider using environment variables or secret management services
-
-## Next Steps
-
-- Read the [README_QDRANT.md](README_QDRANT.md) for detailed usage examples
-- Explore different aggregation methods in [example_qdrant_usage.py](example_qdrant_usage.py)
-- Check the [original project](https://github.com/vinerya/faiss_vector_aggregator) for more information
