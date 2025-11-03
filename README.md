@@ -325,10 +325,6 @@ Contributions are welcome! Feel free to:
 
 MIT License - see LICENSE file for details.
 
-## 🙏 Acknowledgments
-
-Based on the original [faiss_vector_aggregator](https://github.com/vinerya/faiss_vector_aggregator) project, adapted for Qdrant with enhanced features including smart content concatenation.
-
 ## 🔗 Repository
 
 GitHub: [qdrant_vector_aggregator](https://github.com/vinerya/qdrant_vector_aggregator)
