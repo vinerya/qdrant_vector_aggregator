@@ -16,7 +16,7 @@ A Python library for aggregating embeddings in Qdrant collections with **smart c
 Transform chunked embeddings into document-level embeddings:
 
 ```
-Input Collection (N chunks from M documents)
+Input Collection (many chunks)
 ├── Document A - Chunk 1 (embedding + text)
 ├── Document A - Chunk 2 (embedding + text)
 ├── Document A - Chunk 3 (embedding + text)
@@ -25,11 +25,13 @@ Input Collection (N chunks from M documents)
 
                     ↓ Aggregate
 
-Output Collection (M documents)
+Output Collection (fewer documents)
 ├── Document A (averaged embedding + concatenated text)
 ├── Document B (averaged embedding + concatenated text)
 └── ...
 ```
+
+**Result**: Significant compression with preserved semantic meaning and complete document text!
 
 ## 🚀 Quick Start
 
@@ -128,6 +130,40 @@ If no ordering field is found, `page_content` is set to empty string.
 | `soft_dtw`          | Soft Dynamic Time Warping    | Sequence alignment                    |
 | `procrustes`        | Procrustes analysis          | Shape-based alignment                 |
 
+## 🛠️ Included Tools
+
+### 1. Test Connection
+
+```bash
+python3 test_connection.py
+```
+
+Verifies Qdrant connection and displays available collections.
+
+### 2. Example Usage
+
+```bash
+python3 example_usage.py
+```
+
+Example script showing how to aggregate a collection.
+
+### 3. Verify Aggregation
+
+```bash
+python3 verify_aggregation.py
+```
+
+Checks aggregation results and content concatenation statistics.
+
+### 4. Debug Aggregation
+
+```bash
+python3 debug_aggregation.py
+```
+
+Detailed debugging information for troubleshooting.
+
 ## 📖 Advanced Usage
 
 ### Custom Aggregation
@@ -183,7 +219,7 @@ client = QdrantClient(url="your-url", api_key="your-key")
 # Search the aggregated collection
 results = client.search(
     collection_name="aggregated_collection",
-    query_vector=your_query_embedding,
+    query_vector=your_query_embedding,  # 1536-dim vector
     limit=5
 )
 
@@ -206,14 +242,48 @@ qdrant_vector_aggregator/
 ├── SETUP_INSTRUCTIONS.md         # Detailed setup guide
 ├── LICENSE                       # MIT License
 ├── setup.py                      # Installation script
-└── qdrant_vector_aggregator/     # Main package
-    ├── __init__.py              # Package initialization
-    ├── aggregator.py            # Core aggregation logic
-    ├── config.py                # Configuration management
-    ├── embedding_methods.py     # All 14 aggregation methods
-    ├── qdrant_collection_helpers.py  # Qdrant utilities
-    └── utils.py                 # Helper functions
+│
+├── qdrant_vector_aggregator/     # Main package
+│   ├── __init__.py              # Package initialization
+│   ├── aggregator.py            # Core aggregation logic
+│   ├── config.py                # Configuration management
+│   ├── embedding_methods.py     # All 14 aggregation methods
+│   ├── qdrant_collection_helpers.py  # Qdrant utilities
+│   └── utils.py                 # Helper functions
+│
+├── test_connection.py           # Connection testing
+├── example_usage.py             # Usage examples
+├── debug_aggregation.py         # Debugging tool
+└── verify_aggregation.py        # Verification tool
+```
 
+## 🎓 Real-World Example
+
+```python
+from qdrant_vector_aggregator import aggregate_embeddings
+
+# Aggregate document chunks into complete documents
+result = aggregate_embeddings(
+    input_collection_name="my_document_chunks",
+    column_name="metadata.document_name",  # Group by document name
+    output_collection_name="my_complete_documents",
+    method="average"
+)
+
+# Example results:
+# ✅ Significant compression ratio
+# ✅ Content automatically concatenated in proper order
+# ✅ Semantic meaning preserved
+# ✅ Ready for document-level semantic search
+```
+
+## 🔧 Troubleshooting
+
+### Connection Issues
+
+```bash
+# Test your connection
+python3 test_connection.py
 ```
 
 ### Timeout Errors
@@ -255,9 +325,21 @@ Contributions are welcome! Feel free to:
 
 MIT License - see LICENSE file for details.
 
+## 🙏 Acknowledgments
+
+Based on the original [faiss_vector_aggregator](https://github.com/vinerya/faiss_vector_aggregator) project, adapted for Qdrant with enhanced features including smart content concatenation.
+
 ## 🔗 Repository
 
 GitHub: [qdrant_vector_aggregator](https://github.com/vinerya/qdrant_vector_aggregator)
+
+## 📞 Support
+
+For issues or questions:
+
+1. Check `SETUP_INSTRUCTIONS.md` for detailed setup help
+2. Run `debug_aggregation.py` for troubleshooting
+3. Review the example scripts for usage patterns
 
 ---
 
